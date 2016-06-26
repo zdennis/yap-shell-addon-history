@@ -1,8 +1,19 @@
-# history for yap-shell
+# History for yap-shell
 
-Welcome to your new yap addon! In this directory, you'll find the files you need to be able to package up your addon into a gem. Put your Ruby code in the file `lib/yap-shell-addon-history`.
+The History addon is provides primitive history capabilities:
 
-TODO: Delete this and the text above, and describe your gem
+* Loads history from ~/.yap/history when yap is loaded
+* Saves history to ~/.yap/history when yap exits
+* Saving is an append-only operation
+* ~/.yap/history is in YAML format
+
+## Shell Functions
+
+The history addon provides the `history` shell function that prints the contents of the history.
+
+## Limitations
+
+The history addon currently does not support any kind of advanced history operations.
 
 ## Installation
 
