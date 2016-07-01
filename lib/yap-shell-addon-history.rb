@@ -1,4 +1,5 @@
 require 'yap/addon'
+require 'yap-shell-addon-history/version'
 
 module YapShellAddonHistory
   class Addon < ::Yap::Addon::Base
