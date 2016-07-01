@@ -28,8 +28,32 @@ module YapShellAddonHistory
       end
     end
 
+    def back
+      logger.puts "entered"
+      current_position = @world.editor.line.text_up_to_position
+      found_text = @world.history.find_match_backward(@world.editor.line.text_up_to_position)
+      if found_text
+        logger.puts "match found: #{found_text.inspect}"
+        @world.editor.overwrite_line found_text, position: :preserve
+      else
+        logger.puts "no match found"
+      end
+    end
+
+    def forward
+      logger.puts "entered"
+      current_position = @world.editor.line.text_up_to_position
+      found_text = @world.history.find_match_forward(@world.editor.line.text_up_to_position)
+      if found_text
+        logger.puts "match found: #{found_text.inspect}"
+        @world.editor.overwrite_line found_text, position: :preserve
+      else
+        logger.puts "no match found"
+      end
+    end
+
     def save
-      debug_log "saving history file=#{file.inspect}"
+      logger.puts "saving history file=#{file.inspect}"
       File.open(file, "a") do |file|
         # Don't write the YAML header because we're going to append to the
         # history file, not overwrite. YAML works fine without it.
@@ -48,7 +72,7 @@ module YapShellAddonHistory
     private
 
     def load_history
-      debug_log "loading history file=#{file.inspect}"
+      logger.puts "loading history file=#{file.inspect}"
       at_exit { save }
 
       if File.exists?(file) && File.readable?(file)
